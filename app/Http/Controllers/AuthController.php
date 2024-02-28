@@ -10,6 +10,11 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (!empty(Auth::check()))
+        {
+            $type = Auth::user()->user_type;
+            return redirect($type . '/dashboard');
+        }
         return view('auth.login');
     }
 
@@ -19,7 +24,8 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember))
         {
-            return redirect('dashboard');
+            $type = Auth::user()->user_type;
+            return redirect($type . '/dashboard');
         }
         else
             return redirect()->back()->message('error','Please Enter Correct Email and Password');
