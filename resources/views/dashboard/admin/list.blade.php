@@ -7,62 +7,44 @@
 @section('content')
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="div text-right  mb-3">
+                            <a href="{{route('admin.add')}}" class="btn btn-primary">Add New Admin</a>
+                        </div>
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Striped Full Width Table</h3>
+                                <h3 class="card-title">Admin List</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
-                                <table class="table table-striped">
+                                <table class="table table-striped text-center">
                                     <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
-                                        <th>Task</th>
-                                        <th>Progress</th>
-                                        <th style="width: 40px">Label</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Created At</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Update software</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2.</td>
-                                        <td>Clean database</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-warning">70%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3.</td>
-                                        <td>Cron job running</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-primary">30%</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4.</td>
-                                        <td>Fix and squish bugs</td>
-                                        <td>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar bg-success" style="width: 90%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-success">90%</span></td>
-                                    </tr>
+                                    @foreach($getRecord as $value)
+
+                                        <tr>
+                                            <td>{{$value->id}}</td>
+                                            <td>{{$value->name}}</td>
+                                            <td>{{$value->email}}</td>
+                                            <td>{{$value->created_at}}</td>
+                                            <td>
+                                                <a href="{{route('admin.edit',$value->id)}}" class="btn btn-info">Edit</a>
+
+                                                <form action="{{route('admin.delete',$value->id)}}" method="post" style="display: inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

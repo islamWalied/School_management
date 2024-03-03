@@ -26,13 +26,18 @@ Route::middleware('auth')->group(function (){
     Route::get('/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
 });
 
-Route::get('/dashboard/admin/list', function () { return view('dashboard.admin.list'); })->name('dashboard.list');
 
 
 
 
 Route::middleware('auth.type:admin')->group(function (){
     Route::get('/admin/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('admin.dashboard');
+    Route::get('/admin/list', [\App\Http\Controllers\AdminController::class,'index'])->name('admin.list');
+    Route::get('/admin/list/add', [\App\Http\Controllers\AdminController::class,'create'])->name('admin.add');
+    Route::post('/admin/list/add', [\App\Http\Controllers\AdminController::class,'store'])->name('admin.add');
+    Route::get('/admin/list/edit/{id}', [\App\Http\Controllers\AdminController::class,'edit'])->name('admin.edit');
+    Route::patch('/admin/list/update/{user}', [\App\Http\Controllers\AdminController::class,'update'])->name('admin.update');
+    Route::delete('/admin/list/delete/{user}', [\App\Http\Controllers\AdminController::class,'destroy'])->name('admin.delete');
 });
 
 

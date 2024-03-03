@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'user_type',
         'password',
     ];
 
@@ -46,6 +47,14 @@ class User extends Authenticatable
     public static function getEmailSingle($email)
     {
         return self::where('email',$email)->first();
+    }
+    public static function getAdmin()
+    {
+        return self::select('users.*')->where('user_type','admin')->orderBy('id','desc')->get();
+    }
+    public static function getUser($id)
+    {
+        return self::findOrFail($id);
     }
     public static function getTokenSingle($remember_token)
     {

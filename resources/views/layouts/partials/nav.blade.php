@@ -15,7 +15,7 @@
         </li>
         @if($type == 'admin')
             <li class="nav-item">
-                <a href="{{route('dashboard.list')}}" class="nav-link">
+                <a href="{{route('admin.list')}}" class="nav-link">
                     <i class="nav-icon far fa-user"></i>
                     <p>
                         Admin List
