@@ -48,5 +48,13 @@ class UserSeeder extends Seeder
             'user_type' => 'parents',
             'remember_token' => Str::random(10),
         ]);
+        User::create([
+            'name' => 'islam',
+            'email' => 'islam.walied96@gmail.com',
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'user_type' => 'admin',
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

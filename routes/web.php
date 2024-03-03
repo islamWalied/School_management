@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\AuthController::class,'index'])->name('index');
 Route::post('/login',[\App\Http\Controllers\AuthController::class,'login'])->name('login');
+Route::get('/forget-password',[\App\Http\Controllers\ForgetPasswordController::class,'forget_page'])->name('forgetPage');
+Route::post('/forget-password',[\App\Http\Controllers\ForgetPasswordController::class,'forget_password'])->name('forget_password');
+Route::get('/admin/reset/{remember_token}',[\App\Http\Controllers\ForgetPasswordController::class,'reset'])->name('reset');
+Route::post('/admin/reset/{remember_token}',[\App\Http\Controllers\ForgetPasswordController::class,'reset_password'])->name('reset_password');
+
+
+
 Route::middleware('auth')->group(function (){
     Route::get('/logout',[\App\Http\Controllers\AuthController::class,'logout'])->name('logout');
 });
