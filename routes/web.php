@@ -38,6 +38,9 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('/admin/list/edit/{id}', [\App\Http\Controllers\AdminController::class,'edit'])->name('admin.edit');
     Route::patch('/admin/list/update/{user}', [\App\Http\Controllers\AdminController::class,'update'])->name('admin.update');
     Route::delete('/admin/list/delete/{user}', [\App\Http\Controllers\AdminController::class,'destroy'])->name('admin.delete');
+    Route::get('admin/list/trash',[\App\Http\Controllers\AdminController::class,'trash'])->name('admin.trash');
+    Route::patch('admin/list/{id}/restore',[\App\Http\Controllers\AdminController::class,'restore'])->name('admin.restore');
+    Route::delete('admin/list/{id}/force-delete',[\App\Http\Controllers\AdminController::class,'forceDelete'])->name('admin.forceDelete');
 });
 
 

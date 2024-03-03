@@ -7,7 +7,8 @@
 @section('content')
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="div text-right  mb-3">
+                        <div class="text-right mb-3">
+                            <a href="{{route('admin.trash')}}" class="btn btn-secondary">Trash</a>
                             <a href="{{route('admin.add')}}" class="btn btn-primary">Add New Admin</a>
                         </div>
                         <div class="card">

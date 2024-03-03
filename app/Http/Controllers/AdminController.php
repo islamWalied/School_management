@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -76,5 +77,23 @@ class AdminController extends Controller
     {
         $user->delete();
         return redirect()->route('admin.list');
+    }
+    public function trash()
+    {
+        $users = User::onlyTrashed()->paginate();
+        return view("dashboard.admin.trash",compact("users"));
+    }
+    public function restore(Request $request, $id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->restore();
+        return Redirect::route('admin.trash')->with('info','Admin Restored!');
+    }
+    public function forceDelete($id)
+    {
+        $user = User::onlyTrashed()->findOrFail($id);
+        $user->forceDelete();
+        return Redirect::route('admin.dashboard')->with('danger','Admin Deleted!');
+
     }
 }

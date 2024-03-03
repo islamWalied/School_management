@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('user_type',['student','admin','teacher','parents'])->default('student');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
