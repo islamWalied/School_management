@@ -9,11 +9,12 @@
 
 @section('content')
     <div class="mb-3 text-right">
-        <a href="{{route('admin.dashboard')}}" class="btn btn-primary">
+        <a href="{{route('admin.list')}}" class="btn btn-primary">
             Back
         </a>
     </div>
     <table class="table">
+        <x-alert type="info"/>
         <thead>
         <tr>
             <th scope="col">ID</th>

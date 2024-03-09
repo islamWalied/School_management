@@ -23,15 +23,24 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                    <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" placeholder="Name">
+                                    @error('name')
+                                        <div class="text-red">{{$message}}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email" name="email"  placeholder="Email">
+                                    <input type="email" class="form-control" id="email" value="{{ old('email') }}" name="email"  placeholder="Email">
+                                    @error('email')
+                                        <div class="text-red">{{$message}}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
+                                    @error('password')
+                                        <div class="text-red">{{$message}}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <!-- /.card-body -->

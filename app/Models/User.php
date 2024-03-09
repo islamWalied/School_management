@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -51,7 +52,21 @@ class User extends Authenticatable
     }
     public static function getAdmin()
     {
-        return self::select('users.*')->where('user_type','admin')->orderBy('id','desc')->get();
+        $return = self::select('users.*')->where('user_type','admin')->where('deleted_at',null);
+        if (!empty(Request::get('email')))
+        {
+            $return = $return->where('email','like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('name')))
+        {
+            $return = $return->where('name','like', '%' . Request::get('name') . '%');
+        }
+        if (!empty(Request::get('date')))
+        {
+            $return = $return->where('created_at','like', '%' . Request::get('date') . '%');
+        }
+        $return = $return->orderBy('id','desc')->paginate(2);
+        return $return;
     }
     public static function getUser($id)
     {

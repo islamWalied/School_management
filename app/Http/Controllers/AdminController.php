@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
@@ -29,7 +32,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
         User::create([
             'name' => $request->name,
@@ -37,7 +40,7 @@ class AdminController extends Controller
             'user_type' => 'admin',
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('admin.list');
+        return redirect()->route('admin.list')->with('success', 'Admin Added!');
     }
 
     /**
@@ -62,12 +65,16 @@ class AdminController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => "required|email|unique:users,email,". $user->id,
+        ]);
         $user->update([
             'name' => $request->name ?? $user->name,
             'email' => $request->email ?? $user->email,
             'password' => Hash::make($request->password) ?? $user->password,
         ]);
-        return redirect()->route('admin.list');
+        return redirect()->route('admin.list')->with('success', 'Admin Updated!');
     }
 
     /**
@@ -76,7 +83,7 @@ class AdminController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.list');
+        return redirect()->route('admin.list')->with('danger', 'Admin Trashed!');
     }
     public function trash()
     {
@@ -93,7 +100,7 @@ class AdminController extends Controller
     {
         $user = User::onlyTrashed()->findOrFail($id);
         $user->forceDelete();
-        return Redirect::route('admin.dashboard')->with('danger','Admin Deleted!');
+        return Redirect::route('admin.list')->with('danger','Admin Deleted!');
 
     }
 }
