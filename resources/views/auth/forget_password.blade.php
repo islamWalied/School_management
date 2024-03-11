@@ -16,6 +16,7 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
+    <x-alert type="success"/>
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Forget Password</p>

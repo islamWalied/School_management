@@ -22,6 +22,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('admin.class.list')}}" class="nav-link">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                        Class
+                    </p>
+                </a>
+            </li>
         @endif
 
 

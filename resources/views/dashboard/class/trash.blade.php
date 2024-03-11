@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title','Trashed Admin')
+@section('title','Trashed Class')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Admin</li>
+    <li class="breadcrumb-item active">Class</li>
     <li class="breadcrumb-item active">Trashed</li>
 @endsection
 
 
 @section('content')
     <div class="mb-3 text-right">
-        <a href="{{route('admin.list')}}" class="btn btn-primary">
+        <a href="{{route('admin.class.list')}}" class="btn btn-primary">
             Back
         </a>
     </div>
@@ -19,27 +19,27 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Created At</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created By</th>
             <th >Deleted At</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        @forelse($users as $user)
+        @forelse($classes as $class)
             <tr>
-                <th scope="row">{{$user->id}}</th>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->created_at}}</td>
-                <td>{{$user->deleted_at}}</td>
+                <th scope="row">{{$class->id}}</th>
+                <td>{{$class->name}}</td>
+                <td>{{$class->status}}</td>
+                <td>{{$class->created_by}}</td>
+                <td>{{$class->deleted_at}}</td>
                 <td>
-                    <form action="{{route('admin.restore',$user->id)}}" method="post" style="display: inline-block">
+                    <form action="{{route('admin.class.restore',$class->id)}}" method="post" style="display: inline-block">
                         @csrf
                         @method('Patch')
                         <button type="submit" class="btn btn btn-info">Restore</button>
                     </form>
-                    <form action="{{route('admin.forceDelete',$user->id)}}" method="post" style="display: inline-block">
+                    <form action="{{route('admin.class.forceDelete',$class->id)}}" method="post" style="display: inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn btn-danger">Delete</button>
@@ -48,10 +48,10 @@
             </tr>
 
         @empty
-            <tr> <td colspan="7">No Admins Found</td> </tr>
+            <tr> <td colspan="7">No Classes Found</td> </tr>
         @endforelse
         </tbody>
     </table>
 
-    {{ $users->links() }}
+    {{ $classes->links() }}
 @endsection

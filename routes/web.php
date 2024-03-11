@@ -41,6 +41,18 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('admin/list/trash',[\App\Http\Controllers\AdminController::class,'trash'])->name('admin.trash');
     Route::patch('admin/list/{id}/restore',[\App\Http\Controllers\AdminController::class,'restore'])->name('admin.restore');
     Route::delete('admin/list/{id}/force-delete',[\App\Http\Controllers\AdminController::class,'forceDelete'])->name('admin.forceDelete');
+
+
+    //class routes
+    Route::get('admin/class/list',[\App\Http\Controllers\ClassModelController::class,'index'])->name('admin.class.list');
+    Route::get('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'create'])->name('admin.class.add');
+    Route::post('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'store'])->name('admin.class.add');
+    Route::get('admin/class/edit/{classModel}',[\App\Http\Controllers\ClassModelController::class,'edit'])->name('admin.class.edit');
+    Route::patch('admin/class/update/{classModel}',[\App\Http\Controllers\ClassModelController::class,'update'])->name('admin.class.update');
+    Route::delete('admin/class/delete/{classModel}', [\App\Http\Controllers\ClassModelController::class,'destroy'])->name('admin.class.delete');
+    Route::get('admin/class/list/trash',[\App\Http\Controllers\ClassModelController::class,'trash'])->name('admin.class.trash');
+    Route::patch('admin/class/list/{id}/restore',[\App\Http\Controllers\ClassModelController::class,'restore'])->name('admin.class.restore');
+    Route::delete('admin/class/list/{id}/force-delete',[\App\Http\Controllers\ClassModelController::class,'forceDelete'])->name('admin.class.forceDelete');
 });
 
 
