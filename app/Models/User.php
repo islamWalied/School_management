@@ -76,9 +76,5 @@ class User extends Authenticatable
     {
         return self::where('remember_token',$remember_token)->first();
     }
-//    public static function onlyTrashed()
-//    {
-//        return self::where('deleted_at','!=',null)->get();
-//    }
 
 }

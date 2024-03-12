@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function (){
 
 
 Route::middleware('auth.type:admin')->group(function (){
+
+    //admin routes
     Route::get('/admin/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('admin.dashboard');
     Route::get('/admin/list', [\App\Http\Controllers\AdminController::class,'index'])->name('admin.list');
     Route::get('/admin/list/add', [\App\Http\Controllers\AdminController::class,'create'])->name('admin.add');
@@ -43,7 +45,7 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::delete('admin/list/{id}/force-delete',[\App\Http\Controllers\AdminController::class,'forceDelete'])->name('admin.forceDelete');
 
 
-    //class routes
+    // class routes
     Route::get('admin/class/list',[\App\Http\Controllers\ClassModelController::class,'index'])->name('admin.class.list');
     Route::get('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'create'])->name('admin.class.add');
     Route::post('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'store'])->name('admin.class.add');
@@ -53,6 +55,17 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('admin/class/list/trash',[\App\Http\Controllers\ClassModelController::class,'trash'])->name('admin.class.trash');
     Route::patch('admin/class/list/{id}/restore',[\App\Http\Controllers\ClassModelController::class,'restore'])->name('admin.class.restore');
     Route::delete('admin/class/list/{id}/force-delete',[\App\Http\Controllers\ClassModelController::class,'forceDelete'])->name('admin.class.forceDelete');
+
+    // subject routes
+    Route::get('admin/subject/list',[\App\Http\Controllers\SubjectController::class,'index'])->name('admin.subject.list');
+    Route::get('admin/subject/add',[\App\Http\Controllers\SubjectController::class,'create'])->name('admin.subject.add');
+    Route::post('admin/subject/add',[\App\Http\Controllers\SubjectController::class,'store'])->name('admin.subject.add');
+    Route::get('admin/subject/edit/{subject}',[\App\Http\Controllers\SubjectController::class,'edit'])->name('admin.subject.edit');
+    Route::patch('admin/subject/update/{subject}',[\App\Http\Controllers\SubjectController::class,'update'])->name('admin.subject.update');
+    Route::delete('admin/subject/delete/{subject}', [\App\Http\Controllers\SubjectController::class,'destroy'])->name('admin.subject.delete');
+    Route::get('admin/subject/list/trash',[\App\Http\Controllers\SubjectController::class,'trash'])->name('admin.subject.trash');
+    Route::patch('admin/subject/list/{id}/restore',[\App\Http\Controllers\SubjectController::class,'restore'])->name('admin.subject.restore');
+    Route::delete('admin/subject/list/{id}/force-delete',[\App\Http\Controllers\SubjectController::class,'forceDelete'])->name('admin.subject.forceDelete');
 });
 
 

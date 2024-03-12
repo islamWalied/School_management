@@ -63,7 +63,7 @@ class ClassModelController extends Controller
     {
         $classModel->update([
             'name' => $request->name ?? $classModel->name,
-            'status' => $request->status ?? $classModel->email,
+            'status' => $request->status ?? $classModel->status,
         ]);
         return redirect()->route('admin.class.list')->with('success', 'Class Updated!');
     }
@@ -74,14 +74,14 @@ class ClassModelController extends Controller
     public function destroy(ClassModel $classModel)
     {
         $classModel->delete();
-        return redirect()->route('admin.class.list')->with('danger', 'Class Deleted!');
+        return redirect()->route('admin.class.list')->with('danger', 'Class Trashed!');
     }
     public function trash()
     {
         $classes = ClassModel::onlyTrashed()->paginate();
         return view("dashboard.class.trash",compact("classes"));
     }
-    public function restore(Request $request, $id)
+    public function restore($id)
     {
         $classes = ClassModel::onlyTrashed()->findOrFail($id);
         $classes->restore();

@@ -30,6 +30,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{route('admin.subject.list')}}" class="nav-link">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                        Subject
+                    </p>
+                </a>
+            </li>
         @endif
 
 
