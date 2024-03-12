@@ -113,7 +113,6 @@ class ClassSubjectController extends Controller
         }else{
             return redirect()->back()->with('error','Due to some errors please try again');
         }
-
     }
 
     /**
@@ -124,4 +123,35 @@ class ClassSubjectController extends Controller
         $classSubject->delete();
         return redirect()->back()->with('danger','Assigned Deleted!');
     }
+    public function edit_status(ClassSubject $classSubject)
+    {
+        if (!empty($classSubject))
+        {
+            $data['getClass'] = ClassModel::getClass();
+            $data['getSubject'] = Subject::getSubject();
+            return view('dashboard.assign_subjects.edit_status',$data,compact('classSubject'));
+        }
+    }
+    public function update_status(Request $request, ClassSubject $classSubject)
+    {
+        $getAlreadyFirst = ClassSubject::getAlreadyFirst($request->class_id, $request->subject_id);
+        if (!empty($getAlreadyFirst))
+        {
+            $getAlreadyFirst->status = $request->status;
+            $getAlreadyFirst->save();
+            return redirect()->route('admin.assign.list')->with('success','Status is updated successfully');
+        }
+        else {
+            $assign = ClassSubject::create([
+                'class_model_id' => $request->class_id,
+                'subject_id' => $request->subject_id,
+                'status' => $request->status,
+                'created_by' => Auth::user()->id
+            ]);
+        }
+
+        return redirect()->route('admin.assign.list')->with('success','Updated Successfully');
+    }
+
+
 }

@@ -53,6 +53,6 @@ class ClassSubject extends Model
     }
     public static function deleteSubject($class_id)
     {
-        return self::where('class_model_id',$class_id)->delete();
+        return self::where('class_model_id',$class_id)->forceDelete();
     }
 }

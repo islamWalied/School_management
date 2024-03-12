@@ -74,6 +74,8 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('admin/assign-subjects/edit/{classSubject}',[\App\Http\Controllers\ClassSubjectController::class,'edit'])->name('admin.assign.edit');
     Route::patch('admin/assign-subjects/update/{classSubject}',[\App\Http\Controllers\ClassSubjectController::class,'update'])->name('admin.assign.update');
     Route::delete('admin/assign-subjects/delete/{classSubject}', [\App\Http\Controllers\ClassSubjectController::class,'destroy'])->name('admin.assign.delete');
+    Route::get('admin/assign-subjects/change-status/{classSubject}', [\App\Http\Controllers\ClassSubjectController::class,'edit_status'])->name('admin.assign.edit.status');
+    Route::patch('admin/assign-subjects/change-status/{classSubject}', [\App\Http\Controllers\ClassSubjectController::class,'update_status'])->name('admin.assign.update_status');
 });
 
 

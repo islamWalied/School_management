@@ -71,6 +71,7 @@
                                             <td>{{$value->created_by_name}}</td>
                                             <td>{{date('Y-m-d  h:m:s', strtotime($value->created_at))}}</td>
                                             <td>
+                                                <a href="{{route('admin.assign.edit.status',$value->id)}}" class="btn btn-primary">Edit Status</a>
                                                 <a href="{{route('admin.assign.edit',$value->id)}}" class="btn btn-info">Edit</a>
 
                                                 <form action="{{route('admin.assign.delete',$value->id)}}" method="post" style="display: inline-block">

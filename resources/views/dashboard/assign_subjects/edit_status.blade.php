@@ -14,7 +14,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form method="POST" action="{{route('admin.assign.update',$classSubject->id)}}">
+                        <form method="POST" action="{{route('admin.assign.update_status',$classSubject->id)}}">
                             @csrf
                             @method('PATCH')
                             <div class="card-body">
@@ -29,26 +29,14 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="subject_name">Subject Name</label>
-
-                                    @foreach($getSubject as $subject)
-                                        @php
-                                            $checked = '';
-                                        @endphp
-                                        @foreach($getAssignSubjectID as $subject_id)
-                                            @if($subject_id->subject_id == $subject->id)
-                                                @php
-                                                    $checked = 'checked';
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        <div>
-                                            <label class="font-weight-normal">
-                                                <input {{$checked}} type="checkbox"  name="subject_id[]" value="{{$subject->id}}"> {{$subject->name}}
-                                            </label>
-                                        </div>
-                                    @endforeach
+                                    <select id="subject_name" class="form-control" name="subject_id">
+                                        <option value="">Select Subject</option>
+                                            @foreach($getSubject as $subject)
+                                                <option value="{{$subject->id}}" @selected($subject->id == $classSubject->subject_id)>{{$subject->name}}</option>
+                                            @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6">
                                     <label for="status">Status</label>
                                     <select id="status" class="form-control" name="status">
                                         <option value="active" @selected($classSubject->status == 'active')>Active</option>
