@@ -36,4 +36,13 @@ class Subject extends Model
         $return = $return->orderBy('id','desc')->paginate(10);
         return $return;
     }
+    public static function getSubject()
+    {
+        return self::select('subjects.*','users.name as created_by_name')
+                            ->join('users','users.id','subjects.created_by')
+                            ->where('subjects.status','active')
+                            ->where('subjects.deleted_at',null)
+                            ->orderBy('subjects.name','desc')->paginate(10);
+
+    }
 }

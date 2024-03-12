@@ -30,4 +30,15 @@ class ClassModel extends Model
         $return = $return->orderBy('id','desc')->paginate(10);
         return $return;
     }
+
+    public static function getClass()
+    {
+         return self::select('class_models.*','users.name as created_by_name')
+                            ->join('users','users.id','class_models.created_by')
+                            ->where('class_models.status','active')
+                            ->where('class_models.deleted_at',null)
+                            ->orderBy('class_models.name','desc')->paginate(10);
+
+    }
+
 }

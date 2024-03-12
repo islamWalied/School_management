@@ -66,6 +66,14 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('admin/subject/list/trash',[\App\Http\Controllers\SubjectController::class,'trash'])->name('admin.subject.trash');
     Route::patch('admin/subject/list/{id}/restore',[\App\Http\Controllers\SubjectController::class,'restore'])->name('admin.subject.restore');
     Route::delete('admin/subject/list/{id}/force-delete',[\App\Http\Controllers\SubjectController::class,'forceDelete'])->name('admin.subject.forceDelete');
+
+    // assign subject routes
+    Route::get('admin/assign-subjects/list',[\App\Http\Controllers\ClassSubjectController::class,'index'])->name('admin.assign.list');
+    Route::get('admin/assign-subjects/add',[\App\Http\Controllers\ClassSubjectController::class,'create'])->name('admin.assign.add');
+    Route::post('admin/assign-subjects/add',[\App\Http\Controllers\ClassSubjectController::class,'store'])->name('admin.assign.add');
+    Route::get('admin/assign-subjects/edit/{classSubject}',[\App\Http\Controllers\ClassSubjectController::class,'edit'])->name('admin.assign.edit');
+    Route::patch('admin/assign-subjects/update/{classSubject}',[\App\Http\Controllers\ClassSubjectController::class,'update'])->name('admin.assign.update');
+    Route::delete('admin/assign-subjects/delete/{classSubject}', [\App\Http\Controllers\ClassSubjectController::class,'destroy'])->name('admin.assign.delete');
 });
 
 

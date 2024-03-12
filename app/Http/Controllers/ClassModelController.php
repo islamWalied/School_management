@@ -62,7 +62,7 @@ class ClassModelController extends Controller
     public function update(Request $request, ClassModel $classModel)
     {
         $classModel->update([
-            'name' => $request->name ?? $classModel->name,
+            'name' => $request->class_name ?? $classModel->class_name,
             'status' => $request->status ?? $classModel->status,
         ]);
         return redirect()->route('admin.class.list')->with('success', 'Class Updated!');
