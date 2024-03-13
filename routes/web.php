@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function (){
 
 Route::middleware('auth.type:admin')->group(function (){
 
+    Route::get('/admin/change-password',[\App\Http\Controllers\UserController::class,'change_password'])->name('admin.change-password');
+    Route::post('/admin/update-password',[\App\Http\Controllers\UserController::class,'update_password'])->name('admin.update-password');
+
+
     //admin routes
     Route::get('/admin/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('admin.dashboard');
     Route::get('/admin/list', [\App\Http\Controllers\AdminController::class,'index'])->name('admin.list');
@@ -83,6 +87,8 @@ Route::middleware('auth.type:admin')->group(function (){
 
 Route::middleware('auth.type:student')->group(function (){
     Route::get('/student/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('student.dashboard');
+    Route::get('/student/change-password',[\App\Http\Controllers\UserController::class,'change_password'])->name('student.change-password');
+    Route::post('/student/update-password',[\App\Http\Controllers\UserController::class,'update_password'])->name('student.update-password');
 });
 
 
@@ -91,6 +97,9 @@ Route::middleware('auth.type:student')->group(function (){
 
 Route::middleware('auth.type:teacher')->group(function (){
     Route::get('/teacher/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('teacher.dashboard');
+    Route::get('/teacher/change-password',[\App\Http\Controllers\UserController::class,'change_password'])->name('teacher.change-password');
+    Route::post('/teacher/update-password',[\App\Http\Controllers\UserController::class,'update_password'])->name('teacher.update-password');
+
 });
 
 
@@ -98,4 +107,7 @@ Route::middleware('auth.type:teacher')->group(function (){
 
 Route::middleware('auth.type:parents')->group(function (){
     Route::get('/parents/dashboard',[\App\Http\Controllers\DashboardController::class,'index'])->name('parents.dashboard');
+    Route::get('/parents/change-password',[\App\Http\Controllers\UserController::class,'change_password'])->name('parents.change-password');
+    Route::post('/parents/update-password',[\App\Http\Controllers\UserController::class,'update_password'])->name('parents.update-password');
+
 });
