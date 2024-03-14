@@ -47,34 +47,58 @@
                 </div>
 
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-0 overflow-auto">
                     <table class="table table-striped text-center">
                         <thead>
                         <tr>
-                            <th style="width: 10px">#</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Admission Number</th>
+                            <th>Admission Date</th>
+                            <th>Roll Number</th>
+                            <th>Class</th>
+                            <th>Gender</th>
+                            <th>Status</th>
+                            <th>Date Of Birth</th>
+                            <th>Religion</th>
+                            <th>Phone Number</th>
+                            <th>Blood Group</th>
+                            <th>Height</th>
+                            <th>Weight</th>
                             <th>Created At</th>
-{{--                            <th>Actions</th>--}}
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($getRecord as $value)
 
                             <tr>
-                                <td>{{$value->id}}</td>
+                                <td><a href="{{asset('storage/'.$value->image)}}" ><img src="{{asset('storage/'.$value->image)}}" class="rounded-circle" width="60px" height="60px" alt="image"/></a></td>
                                 <td>{{$value->name}}</td>
-                                <td>{{$value->email}}</td>
+                                <td >{{$value->email}}</td>
+                                <td>{{$value->admission_number}}</td>
+                                <td>{{$value->admission_date}}</td>
+                                <td>{{$value->roll_number}}</td>
+                                <td>{{$value->class_name}}</td>
+                                <td>{{$value->gender}}</td>
+                                <td>{{$value->status}}</td>
+                                <td>{{$value->date_of_birth}}</td>
+                                <td>{{$value->religion}}</td>
+                                <td>{{$value->phone_number}}</td>
+                                <td>{{$value->blood_group}}</td>
+                                <td>{{$value->height}}</td>
+                                <td>{{$value->weight}}</td>
                                 <td>{{date('Y-m-d  h:m:s', strtotime($value->created_at))}}</td>
-{{--                                <td>--}}
-{{--                                    <a href="{{route('admin.student.edit',$value->id)}}" class="btn btn-info">Edit</a>--}}
+                                <td style="min-width: 200px">
+                                    <a href="{{route('admin.student.edit',$value->id)}}" class="btn btn-info">Edit</a>
 
-{{--                                    <form action="{{route('admin.student.delete',$value->id)}}" method="post" style="display: inline-block">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn btn-danger">Delete</button>--}}
-{{--                                    </form>--}}
-{{--                                </td>--}}
+                                    <form action="{{route('admin.student.delete',$value->id)}}" method="post" style="display: inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

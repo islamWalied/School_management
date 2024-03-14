@@ -73,8 +73,8 @@
                                         <label for="gender">Gender</label>
                                         <select id="gender" class="form-control" name="gender">
                                             <option value="">Select Gender</option>
-                                            <option {{old('gender') == 'Male' ? 'selected' : ''}} value="male">Male</option>
-                                            <option {{old('gender') == 'Female' ? 'selected' : ''}} value="female">Female</option>
+                                            <option {{old('gender') == 'male' ? 'selected' : ''}} value="male">Male</option>
+                                            <option {{old('gender') == 'female' ? 'selected' : ''}} value="female">Female</option>
                                         </select>
                                         @error('gender')
                                         <div class="text-red">{{$message}}</div>
@@ -84,8 +84,8 @@
                                         <label for="status">Status</label>
                                         <select id="status" class="form-control" name="status">
                                             <option value="">Select Status</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option {{old('status') == 'active' ? 'selected' : ''}} value="active">Active</option>
+                                            <option {{old('status') == 'inactive' ? 'selected' : ''}}  value="inactive">Inactive</option>
                                         </select>
                                         @error('status')
                                         <div class="text-red">{{$message}}</div>

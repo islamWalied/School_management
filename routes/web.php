@@ -53,6 +53,9 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::get('/admin/student/list', [\App\Http\Controllers\AdminStudentController::class,'index'])->name('admin.student.list');
     Route::get('/admin/student/list/add', [\App\Http\Controllers\AdminStudentController::class,'create'])->name('admin.student.add');
     Route::post('/admin/student/list/add', [\App\Http\Controllers\AdminStudentController::class,'store'])->name('admin.student.add');
+    Route::get('/admin/student/list/edit/{user}', [\App\Http\Controllers\AdminStudentController::class,'edit'])->name('admin.student.edit');
+    Route::patch('/admin/student/list/update/{user}', [\App\Http\Controllers\AdminStudentController::class,'update'])->name('admin.student.update');
+    Route::delete('/admin/student/list/delete/{user}', [\App\Http\Controllers\AdminStudentController::class,'destroy'])->name('admin.student.delete');
 
     // class routes
     Route::get('admin/class/list',[\App\Http\Controllers\ClassModelController::class,'index'])->name('admin.class.list');

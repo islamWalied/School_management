@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title','Edit Class')
+@section('title','Edit Student')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Class</li>
+    <li class="breadcrumb-item active">Student</li>
     <li class="breadcrumb-item active">Edit</li>
 @endsection
 @section('content')
@@ -14,29 +14,147 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{$classModel->name}}</h3>
+                            <h3 class="card-title">Edit {{$getRecord->name}}</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{route('admin.class.update',$classModel->id)}}">
+                        <form method="POST" action="{{route('admin.student.update',$getRecord->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="class_name">Class Name</label>
-                                    <input type="text" class="form-control" id="class_name" name="class_name" value="{{old('class_name',$classModel->name)}}" placeholder="Class Name">
-                                    @error('class_name')
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="name">First Name</label>
+                                        <input type="text" class="form-control" id="name" value="{{ old('name',$getRecord->name) }}" name="name" placeholder="First Name">
+                                        @error('name')
                                         <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name" value="{{ old('last_name',$getRecord->last_name) }}" name="last_name" placeholder="Last Name">
+                                        @error('name')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="admission_number">Admission Number</label>
+                                        <input type="text" class="form-control" id="admission_number" value="{{ old('admission_number',$getRecord->admission_number) }}" name="admission_number" placeholder="Admission Number">
+                                        @error('admission_number')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="admission_date">Admission Date</label>
+                                        <input type="date" class="form-control" id="admission_date" value="{{ old('admission_date',$getRecord->admission_date) }}" name="admission_date" placeholder="Admission Date">
+                                        @error('admission_date')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="roll_number">Roll Number</label>
+                                        <input type="text" class="form-control" id="roll_number" value="{{ old('roll_number',$getRecord->roll_number) }}" name="roll_number" placeholder="Roll Number">
+                                        @error('roll_number')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="class_id">Select Class</label>
+                                        <select id="class_id" class="form-control" name="class_model_id">
+                                            <option value="">Select Class</option>
+                                            @foreach($getClass as $class)
+                                                <option @selected(old('class_model_id',$getRecord->class_model_id) == $class->id) value="{{$class->id}}">{{$class->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('class_model_id')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" class="form-control" name="gender">
+                                            <option value="">Select Gender</option>
+                                            <option {{old('gender',$getRecord->gender) == 'male' ? 'selected' : ''}} value="male">Male</option>
+                                            <option {{old('gender',$getRecord->gender) == 'female' ? 'selected' : ''}} value="female">Female</option>
+                                        </select>
+                                        @error('gender')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="status">Status</label>
+                                        <select id="status" class="form-control" name="status">
+                                            <option value="">Select Status</option>
+                                            <option {{old('status',$getRecord->status) == 'active' ? 'selected' : ''}} value="active">Active</option>
+                                            <option {{old('status',$getRecord->status) == 'inactive' ? 'selected' : ''}}  value="inactive">Inactive</option>
+                                        </select>
+                                        @error('status')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="date_of_birth">Date Of Birth</label>
+                                        <input type="date" class="form-control" id="date_of_birth" value="{{ old('date_of_birth',$getRecord->date_of_birth) }}" name="date_of_birth">
+                                        @error('date_of_birth')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="religion">Religion</label>
+                                        <input type="text" class="form-control" id="religion" value="{{ old('religion',$getRecord->religion) }}" name="religion" placeholder="Religion">
+                                        @error('religion')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="phone_number">Mobile Number</label>
+                                        <input type="text" class="form-control" id="phone_number" value="{{ old('phone_number',$getRecord->phone_number) }}" name="phone_number" placeholder="Mobile Number">
+                                        @error('phone_number')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="profile_picture">Profile Picture</label>
+                                        <input type="file" class="form-control" id="profile_picture" name="image">
+                                        @error('image')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="blood_group">Blood Group</label>
+                                        <input type="text" class="form-control" id="blood_group" value="{{ old('blood_group',$getRecord->blood_group) }}" name="blood_group" placeholder="Blood Group">
+                                        @error('blood_group')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="height">Height</label>
+                                        <input type="text" class="form-control" id="height" value="{{ old('height',$getRecord->height) }}" name="height" placeholder="Height">
+                                        @error('height')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="weight">Weight</label>
+                                        <input type="text" class="form-control" id="weight" value="{{ old('weight',$getRecord->weight) }}" name="weight" placeholder="Weight">
+                                        @error('weight')
+                                        <div class="text-red">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" id="email" value="{{ old('email',$getRecord->email) }}" name="email"  placeholder="Email">
+                                    @error('email')
+                                    <div class="text-red">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select id="status" class="form-control" name="status">
-                                        <option value="active" @selected($classModel->status == 'active')>Active</option>
-                                        <option value="inactive" @selected($classModel->status == 'inactive')>Inactive</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="text-red">{{$message}}</div>
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
+                                    @error('password')
+                                    <div class="text-red">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
