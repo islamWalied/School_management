@@ -16,7 +16,7 @@ class ClassModelController extends Controller
     public function index()
     {
         $data['getRecord'] = ClassModel::getClasses();
-        return view('dashboard.class.list',$data);
+        return view('dashboard.admin.class.list',$data);
     }
 
     /**
@@ -24,7 +24,7 @@ class ClassModelController extends Controller
      */
     public function create()
     {
-        return view('dashboard.class.add');
+        return view('dashboard.admin.class.add');
     }
 
     /**
@@ -53,7 +53,7 @@ class ClassModelController extends Controller
      */
     public function edit(ClassModel $classModel)
     {
-        return view('dashboard.class.edit',compact('classModel'));
+        return view('dashboard.admin.class.edit',compact('classModel'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ClassModelController extends Controller
     public function trash()
     {
         $classes = ClassModel::onlyTrashed()->paginate();
-        return view("dashboard.class.trash",compact("classes"));
+        return view("dashboard.admin.class.trash",compact("classes"));
     }
     public function restore($id)
     {

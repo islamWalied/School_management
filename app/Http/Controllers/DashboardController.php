@@ -12,8 +12,7 @@ class DashboardController extends Controller
         if (!empty(Auth::check()))
         {
             $type = Auth::user()->user_type;
-//            dd($type);
-            return view('dashboard.' . $type .'.index',);
+            return view('dashboard.' . $type .'.index');
         }
         return redirect()->route('/');
     }

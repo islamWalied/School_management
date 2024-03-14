@@ -49,6 +49,11 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::delete('admin/list/{id}/force-delete',[\App\Http\Controllers\AdminController::class,'forceDelete'])->name('admin.forceDelete');
 
 
+    // admin students routes
+    Route::get('/admin/student/list', [\App\Http\Controllers\AdminStudentController::class,'index'])->name('admin.student.list');
+    Route::get('/admin/student/list/add', [\App\Http\Controllers\AdminStudentController::class,'create'])->name('admin.student.add');
+    Route::post('/admin/student/list/add', [\App\Http\Controllers\AdminStudentController::class,'store'])->name('admin.student.add');
+
     // class routes
     Route::get('admin/class/list',[\App\Http\Controllers\ClassModelController::class,'index'])->name('admin.class.list');
     Route::get('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'create'])->name('admin.class.add');

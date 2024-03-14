@@ -15,7 +15,7 @@ class SubjectController extends Controller
     public function index()
     {
         $data['getRecord'] = Subject::getSubjects();
-        return view('dashboard.subject.list',$data);
+        return view('dashboard.admin.subject.list',$data);
     }
 
     /**
@@ -23,7 +23,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('dashboard.subject.add');
+        return view('dashboard.admin.subject.add');
     }
 
     /**
@@ -53,7 +53,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        return view('dashboard.subject.edit',compact('subject'));
+        return view('dashboard.admin.subject.edit',compact('subject'));
     }
 
     /**
@@ -80,7 +80,7 @@ class SubjectController extends Controller
     public function trash()
     {
         $subjects = Subject::onlyTrashed()->paginate(2);
-        return view("dashboard.subject.trash",compact("subjects"));
+        return view("dashboard.admin.subject.trash",compact("subjects"));
     }
     public function restore($id)
     {

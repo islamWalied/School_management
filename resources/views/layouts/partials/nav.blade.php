@@ -33,6 +33,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{route('admin.student.list')}}" class="nav-link">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                        Student List
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('admin.class.list')}}" class="nav-link">
                     <i class="nav-icon far fa-user"></i>
                     <p>

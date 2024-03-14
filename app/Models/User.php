@@ -24,6 +24,20 @@ class User extends Authenticatable
         'email',
         'user_type',
         'password',
+        'last_name',
+        'admission_number',
+        'admission_date',
+        'roll_number',
+        'class_model_id',
+        'gender',
+        'status',
+        'religion',
+        'date_of_birth',
+        'phone_number',
+        'image',
+        'blood_group',
+        'height',
+        'weight',
     ];
 
     /**
@@ -76,5 +90,12 @@ class User extends Authenticatable
     {
         return self::where('remember_token',$remember_token)->first();
     }
-
+    public static function getStudent()
+    {
+        return self::select('users.*')
+                    ->where('user_type','student')
+                    ->where('deleted_at',null)
+                    ->orderBy('id','desc')
+                    ->paginate(10);
+    }
 }

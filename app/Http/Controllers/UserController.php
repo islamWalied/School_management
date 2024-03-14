@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function change_password()
     {
-        return view('dashboard.profile.change-password');
+        return view('dashboard.admin.profile.change-password');
     }
 
     public function update_password(Request $request)

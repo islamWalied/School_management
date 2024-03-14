@@ -17,7 +17,7 @@ class ClassSubjectController extends Controller
     public function index()
     {
         $data['getRecord'] = ClassSubject::getRecord();
-        return view('dashboard.assign_subjects.list',$data);
+        return view('dashboard.admin.assign_subjects.list',$data);
     }
 
     /**
@@ -27,7 +27,7 @@ class ClassSubjectController extends Controller
     {
         $data['getClass'] = ClassModel::getClass();
         $data['getSubject'] = Subject::getSubject();
-        return view('dashboard.assign_subjects.add',$data);
+        return view('dashboard.admin.assign_subjects.add',$data);
     }
 
     /**
@@ -79,7 +79,7 @@ class ClassSubjectController extends Controller
             $data['getAssignSubjectID'] = ClassSubject::getAssignSubjectID($classSubject->class_model_id);
             $data['getClass'] = ClassModel::getClass();
             $data['getSubject'] = Subject::getSubject();
-            return view('dashboard.assign_subjects.edit',$data,compact('classSubject'));
+            return view('dashboard.admin.assign_subjects.edit',$data,compact('classSubject'));
         }
     }
 
@@ -129,7 +129,7 @@ class ClassSubjectController extends Controller
         {
             $data['getClass'] = ClassModel::getClass();
             $data['getSubject'] = Subject::getSubject();
-            return view('dashboard.assign_subjects.edit_status',$data,compact('classSubject'));
+            return view('dashboard.admin.assign_subjects.edit_status',$data,compact('classSubject'));
         }
     }
     public function update_status(Request $request, ClassSubject $classSubject)
