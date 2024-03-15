@@ -34,6 +34,8 @@ class User extends Authenticatable
         'religion',
         'date_of_birth',
         'phone_number',
+        'occupation',
+        'address',
         'image',
         'blood_group',
         'height',
@@ -96,70 +98,72 @@ class User extends Authenticatable
             ->join('class_models','class_models.id','users.class_model_id','left')
                     ->where('user_type','student')
                     ->where('users.deleted_at',null);
-                    if (!empty(Request::get('name')))
-                    {
-                        $return = $return->where('users.name','LIKE','%'.Request::get('name').'%');
-                    }
-                    if (!empty(Request::get('last_name')))
-                    {
-                        $return = $return->where('users.name','LIKE','%'.Request::get('name').'%');
-                    }
-                    if (!empty(Request::get('email')))
-                    {
-                        $return = $return->where('users.email','LIKE','%'.Request::get('email').'%');
-                    }
-                    if (!empty(Request::get('religion')))
-                    {
-                        $return = $return->where('users.religion','LIKE','%'.Request::get('religion').'%');
-                    }
-                    if (!empty(Request::get('date_of_birth')))
-                    {
-                        $return = $return->where('users.date_of_birth','LIKE','%'.Request::get('date_of_birth').'%');
-                    }
-        if (!empty(Request::get('height')))
-        {
-            $return = $return->where('users.height','LIKE','%'.Request::get('height').'%');
+        return self::extracted($return);
+    }
+    public static function getParents()
+    {
+        $return =  self::select('users.*')
+            ->where('user_type','parents')
+            ->where('users.deleted_at',null);
+
+        return self::extracted($return);
+    }
+
+    /**
+     * @param $return
+     * @return mixed
+     */
+    public static function extracted($return)
+    {
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'LIKE', '%' . Request::get('name') . '%');
         }
-        if (!empty(Request::get('blood_group')))
-        {
-            $return = $return->where('users.blood_group','LIKE','%'.Request::get('blood_group').'%');
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.name', 'LIKE', '%' . Request::get('name') . '%');
         }
-        if (!empty(Request::get('status')))
-        {
-            $return = $return->where('users.status','Like',Request::get('status'));
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'LIKE', '%' . Request::get('email') . '%');
         }
-        if (!empty(Request::get('weight')))
-        {
-            $return = $return->where('users.weight','LIKE','%'.Request::get('weight').'%');
+        if (!empty(Request::get('religion'))) {
+            $return = $return->where('users.religion', 'LIKE', '%' . Request::get('religion') . '%');
         }
-        if (!empty(Request::get('phone_number')))
-        {
-            $return = $return->where('users.phone_number','LIKE','%'. Request::get('phone_number') .'%');
+        if (!empty(Request::get('date_of_birth'))) {
+            $return = $return->where('users.date_of_birth', 'LIKE', '%' . Request::get('date_of_birth') . '%');
         }
-        if (!empty(Request::get('gender')))
-        {
-            $return = $return->where('users.gender','LIKE','%'.Request::get('gender').'%');
+        if (!empty(Request::get('height'))) {
+            $return = $return->where('users.height', 'LIKE', '%' . Request::get('height') . '%');
         }
-        if (!empty(Request::get('roll_number')))
-        {
-            $return = $return->where('users.roll_number','LIKE','%'.Request::get('roll_number').'%');
+        if (!empty(Request::get('blood_group'))) {
+            $return = $return->where('users.blood_group', 'LIKE', '%' . Request::get('blood_group') . '%');
         }
-        if (!empty(Request::get('admission_number')))
-        {
-            $return = $return->where('users.admission_number','LIKE','%'.Request::get('admission_number').'%');
+        if (!empty(Request::get('status'))) {
+            $return = $return->where('users.status', 'Like', Request::get('status'));
         }
-        if (!empty(Request::get('admission_date')))
-        {
-            $return = $return->where('users.admission_date','LIKE','%'.Request::get('admission_date').'%');
+        if (!empty(Request::get('weight'))) {
+            $return = $return->where('users.weight', 'LIKE', '%' . Request::get('weight') . '%');
         }
-        if (!empty(Request::get('class_model_id')))
-        {
-            $return = $return->where('class_models.name','LIKE','%'.Request::get('class_model_id').'%');
+        if (!empty(Request::get('phone_number'))) {
+            $return = $return->where('users.phone_number', 'LIKE', '%' . Request::get('phone_number') . '%');
+        }
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', 'LIKE', '%' . Request::get('gender') . '%');
+        }
+        if (!empty(Request::get('roll_number'))) {
+            $return = $return->where('users.roll_number', 'LIKE', '%' . Request::get('roll_number') . '%');
+        }
+        if (!empty(Request::get('admission_number'))) {
+            $return = $return->where('users.admission_number', 'LIKE', '%' . Request::get('admission_number') . '%');
+        }
+        if (!empty(Request::get('admission_date'))) {
+            $return = $return->where('users.admission_date', 'LIKE', '%' . Request::get('admission_date') . '%');
+        }
+        if (!empty(Request::get('class_model_id'))) {
+            $return = $return->where('class_models.name', 'LIKE', '%' . Request::get('class_model_id') . '%');
         }
 
 
-        $return  = $return->orderBy('users.id','desc')
-                    ->paginate(10);
+        $return = $return->orderBy('users.id', 'desc')
+            ->paginate(10);
         return $return;
     }
 }

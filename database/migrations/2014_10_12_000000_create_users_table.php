@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('image')->nullable();
             $table->string('blood_group')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('address')->nullable();
             $table->integer('height')->nullable();
             $table->integer('weight')->nullable();
             $table->rememberToken();

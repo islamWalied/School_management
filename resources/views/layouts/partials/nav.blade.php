@@ -41,6 +41,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{route('admin.parents.list')}}" class="nav-link">
+                    <i class="nav-icon far fa-user"></i>
+                    <p>
+                        Parent List
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{route('admin.class.list')}}" class="nav-link">
                     <i class="nav-icon far fa-user"></i>
                     <p>

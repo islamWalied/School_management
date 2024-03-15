@@ -57,6 +57,16 @@ Route::middleware('auth.type:admin')->group(function (){
     Route::patch('/admin/student/list/update/{user}', [\App\Http\Controllers\AdminStudentController::class,'update'])->name('admin.student.update');
     Route::delete('/admin/student/list/delete/{user}', [\App\Http\Controllers\AdminStudentController::class,'destroy'])->name('admin.student.delete');
 
+
+    // admin parents routes
+    Route::get('/admin/parents/list', [\App\Http\Controllers\AdminParentController::class,'index'])->name('admin.parents.list');
+    Route::get('/admin/parents/list/add', [\App\Http\Controllers\AdminParentController::class,'create'])->name('admin.parents.add');
+    Route::post('/admin/parents/list/add', [\App\Http\Controllers\AdminParentController::class,'store'])->name('admin.parents.add');
+    Route::get('/admin/parents/list/edit/{user}', [\App\Http\Controllers\AdminParentController::class,'edit'])->name('admin.parents.edit');
+    Route::patch('/admin/parents/list/update/{user}', [\App\Http\Controllers\AdminParentController::class,'update'])->name('admin.parents.update');
+    Route::delete('/admin/parents/list/delete/{user}', [\App\Http\Controllers\AdminParentController::class,'destroy'])->name('admin.parents.delete');
+
+
     // class routes
     Route::get('admin/class/list',[\App\Http\Controllers\ClassModelController::class,'index'])->name('admin.class.list');
     Route::get('admin/class/add',[\App\Http\Controllers\ClassModelController::class,'create'])->name('admin.class.add');

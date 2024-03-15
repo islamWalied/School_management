@@ -64,6 +64,7 @@ class AdminStudentController extends Controller
             'blood_group' => $request->blood_group,
             'height' => $request->height,
             'weight' => $request->weight,
+            'user_type' => 'student',
         ]);
         return redirect()->route('admin.student.list')->with('success','Student Created Successfully!');
     }
@@ -94,10 +95,14 @@ class AdminStudentController extends Controller
             'weight' => 'nullable|numeric',
         ]);
         $image = $user->image;
+        if ($image){
+            Storage::delete($user->image);
+        }
         if ($request->hasFile('image'))
         {
             $image = $request->file('image')->store('students','public');
         }
+
         $user->update([
             'name' => $request->name ?? $user->name,
             'last_name' => $request->last_name ?? $user->last_name,
