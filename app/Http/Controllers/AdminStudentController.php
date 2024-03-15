@@ -14,6 +14,7 @@ class AdminStudentController extends Controller
     public function index()
     {
         $data['getRecord'] = User::getStudent();
+        $data['getClass'] = ClassModel::getClass();
         return view('dashboard.admin.student.list',$data);
     }
     public function create()

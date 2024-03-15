@@ -28,7 +28,7 @@ class AuthController extends Controller
             return redirect($type . '/dashboard');
         }
         else
-            return redirect()->back()->with('error','Please Enter Correct Email and Password');
+            return redirect()->back()->with('danger','Please Enter Correct Email and Password');
     }
     public function logout()
     {
