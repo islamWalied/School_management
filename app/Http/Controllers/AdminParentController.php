@@ -95,11 +95,12 @@ class AdminParentController extends Controller
             'phone_number' => 'nullable|numeric',
         ]);
         $image = $user->image;
-        if ($image){
-            Storage::delete($user->image);
-        }
+
         if ($request->hasFile('image'))
         {
+            if ($image){
+                Storage::delete($user->image);
+            }
             $image = $request->file('image')->store('parents','public');
         }
         $user->update([
@@ -129,4 +130,30 @@ class AdminParentController extends Controller
         $user->delete();
         return redirect()->back()->with('danger','Parent Deleted Successfully!');
     }
+    public function myStudent(User $user)
+    {
+        $data['getParent'] = User::getUser($user->id);
+        $data['parent_id'] = $user;
+        $data['getSearchStudents'] = User::getSearchStudents();
+        $data['getRecord'] = User::getMyStudents($user->id);
+        return view('dashboard.admin.parents.my_student',$data);
+    }
+    public function AssignStudentToParent($student_id, $parent_id)
+    {
+        $student = User::getUser($student_id);
+        $student->update([
+            'parent_id' => $parent_id
+        ]);
+        return redirect()->back()->with('success', 'Student assigned successfully');
+    }
+    public function DeleteStudentFromParent($student_id)
+    {
+        $student = User::getUser($student_id);
+        $student->update([
+            'parent_id' => null
+        ]);
+        return redirect()->back()->with('success', 'Student assign removed successfully');
+    }
+
+
 }

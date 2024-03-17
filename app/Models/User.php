@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'user_type',
+        'parent_id',
         'password',
         'last_name',
         'admission_number',
@@ -94,9 +95,10 @@ class User extends Authenticatable
     }
     public static function getStudent()
     {
-        $return =  self::select('users.*', 'class_models.name as class_name')
+        $return =  self::select('users.*', 'class_models.name as class_name','parent.name as parent_name','parent.last_name as parent_last_name')
+            ->join('users as parent','parent.id', '=','users.parent_id','left')
             ->join('class_models','class_models.id','users.class_model_id','left')
-                    ->where('user_type','student')
+                    ->where('users.user_type','student')
                     ->where('users.deleted_at',null);
         return self::extracted($return);
     }
@@ -108,13 +110,54 @@ class User extends Authenticatable
 
         return self::extracted($return);
     }
-
+    public static function getMyStudents($parent_id)
+    {
+            $return =  self::select('users.*', 'class_models.name as class_name','parent.name as parent_name')
+                ->join('users as parent','parent.id', '=','users.parent_id','left')
+                ->join('class_models','class_models.id', '=','users.class_model_id','left')
+                ->where('users.user_type','student')
+                ->where('users.parent_id',$parent_id)
+                ->where('users.deleted_at',null)
+                ->orderBy('users.id', 'desc')
+            ->get();
+            return $return;
+    }
+    public static function getSearchStudents()
+    {
+        if (!empty(Request::get('student_id')) || !empty(Request::get('name'))
+            || !empty(Request::get('last_name')) || !empty(Request::get('email')))
+        {
+            $return =  self::select('users.*', 'class_models.name as class_name','parent.name as parent_name')
+                ->join('users as parent','parent.id','=','users.parent_id','left')
+                ->join('class_models','class_models.id','users.class_model_id','left')
+                ->where('users.user_type','student')
+                ->where('users.deleted_at',null);
+            if (!empty(Request::get('student_id'))) {
+                $return = $return->where('users.id','=',Request::get('student_id'));
+            }
+            if (!empty(Request::get('name'))) {
+                $return = $return->where('users.name', 'LIKE', '%' . Request::get('name') . '%');
+            }
+            if (!empty(Request::get('last_name'))) {
+                $return = $return->where('users.name', 'LIKE', '%' . Request::get('name') . '%');
+            }
+            if (!empty(Request::get('email'))) {
+                $return = $return->where('users.email', 'LIKE', '%' . Request::get('email') . '%');
+            }
+            $return = $return->orderBy('users.id', 'desc')
+                ->paginate(10);
+            return $return;
+        }
+    }
     /**
      * @param $return
      * @return mixed
      */
     public static function extracted($return)
     {
+        if (!empty(Request::get('student_id'))) {
+            $return = $return->where('users.id','=',Request::get('student_id'));
+        }
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'LIKE', '%' . Request::get('name') . '%');
         }

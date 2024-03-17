@@ -34,6 +34,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->integer('height')->nullable();
             $table->integer('weight')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->on('users')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

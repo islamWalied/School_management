@@ -115,6 +115,8 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn btn-danger">Delete</button>
                                     </form>
+                                    <a href="{{route('admin.parents.my_student',$value->id)}}" class="btn btn-primary">My Student</a>
+
                                 </td>
                             </tr>
                         @endforeach

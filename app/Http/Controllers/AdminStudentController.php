@@ -95,11 +95,11 @@ class AdminStudentController extends Controller
             'weight' => 'nullable|numeric',
         ]);
         $image = $user->image;
-        if ($image){
-            Storage::delete($user->image);
-        }
         if ($request->hasFile('image'))
         {
+            if ($image){
+                Storage::delete($user->image);
+            }
             $image = $request->file('image')->store('students','public');
         }
 

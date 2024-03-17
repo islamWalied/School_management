@@ -117,6 +117,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Parent Name</th>
                             <th>Email</th>
                             <th>Admission Number</th>
                             <th>Admission Date</th>
@@ -140,6 +141,7 @@
                             <tr>
                                 <td><a href="{{asset('storage/'.$value->image)}}" ><img src="{{asset('storage/'.$value->image)}}" class="rounded-circle" width="60px" height="60px" alt="image"/></a></td>
                                 <td>{{$value->name}}</td>
+                                <td>{{$value->parent_name}} {{$value->parent_last_name}}</td>
                                 <td >{{$value->email}}</td>
                                 <td>{{$value->admission_number}}</td>
                                 <td>{{$value->admission_date}}</td>
